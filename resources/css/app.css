@@ -9,3 +9,35 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@layer utilities {
+    .neon-text-green {
+        @apply text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.8)];
+    }
+
+    .neon-text-cyan {
+        @apply text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.7)];
+    }
+
+    .neon-border-cyan {
+        box-shadow: 0 0 12px rgba(34, 211, 238, 0.35), inset 0 0 12px rgba(34, 211, 238, 0.05);
+    }
+
+    .neon-btn {
+        @apply transition-all duration-200;
+    }
+
+    .neon-btn:hover {
+        box-shadow: 0 0 16px rgba(34, 211, 238, 0.5);
+    }
+
+    .input-touch {
+        @apply min-h-11 text-base sm:text-sm touch-manipulation;
+    }
+}
+
+@layer base {
+    dialog::backdrop {
+        background: rgb(0 0 0 / 0.7);
+    }
+}
