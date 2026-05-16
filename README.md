@@ -284,6 +284,7 @@ Leave **Custom start command** empty — Railway runs Laravel via php-fpm + Cadd
 | Migrations not run | Pre-deploy command above, then **Redeploy** |
 | See real error | Deployments → latest → **View logs**; or set `APP_DEBUG=true` briefly |
 | `/up` works but `/` is 500 | Run `npm run build` in deploy — `public/build` is not in git; set **Build command** in `railway.toml` |
+| Build fails `npm ci` EBUSY | Use `npm install` not `npm ci` in build command (see `railway.toml`) |
 7. After first deploy, open the URL → **Register** or use demo account from seeder (`demo@neonbill.test` / `password` if you ran `migrate:fresh --seed` once via Railway shell).
 
 **Render (alternative):** Create **Web Service** + **PostgreSQL** or external MySQL; build: `composer install --no-dev && npm ci && npm run build`; start: `php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT`. Free instances **sleep** after ~15 min idle (first visit may take 30–60s).
