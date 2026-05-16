@@ -1,3 +1,6 @@
+[build]
+buildCommand = "composer install --no-dev --optimize-autoloader && npm ci && npm run build"
+
 [deploy]
 preDeployCommand = "chmod +x ./railway/init-app.sh && ./railway/init-app.sh"
 healthcheckPath = "/up"

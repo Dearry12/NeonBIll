@@ -264,13 +264,26 @@ MAIL_FROM_ADDRESS=noreply@your-app.up.railway.app
 MAIL_FROM_NAME=NeonBill
 ```
 
-5. **Settings** → **Deploy** → set start command (if not auto-detected):
+5. **Settings** → **Deploy** → **Pre-deploy command** (or use repo `railway.toml`):
 
 ```bash
-php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+chmod +x ./railway/init-app.sh && ./railway/init-app.sh
 ```
 
-6. **Settings** → generate a **public domain** (e.g. `neonbill-production.up.railway.app`). Set `APP_URL` to that exact URL.
+Leave **Custom start command** empty — Railway runs Laravel via php-fpm + Caddy. Domain port = **8080** (Railway `PORT`).
+
+6. **Settings** → **Networking** → **Generate Domain**. Set `APP_URL` to that exact URL (e.g. `https://neonbill-production.up.railway.app`).
+
+**500 Server Error checklist**
+
+| Check | Fix |
+|-------|-----|
+| No MySQL service | **+ New** → **Database** → **MySQL**, link variables to NeonBill |
+| `APP_KEY` empty | Terminal: `php artisan key:generate --show` → paste into Variables |
+| `APP_URL` wrong | Must match your Railway domain exactly |
+| Migrations not run | Pre-deploy command above, then **Redeploy** |
+| See real error | Deployments → latest → **View logs**; or set `APP_DEBUG=true` briefly |
+| `/up` works but `/` is 500 | Run `npm run build` in deploy — `public/build` is not in git; set **Build command** in `railway.toml` |
 7. After first deploy, open the URL → **Register** or use demo account from seeder (`demo@neonbill.test` / `password` if you ran `migrate:fresh --seed` once via Railway shell).
 
 **Render (alternative):** Create **Web Service** + **PostgreSQL** or external MySQL; build: `composer install --no-dev && npm ci && npm run build`; start: `php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT`. Free instances **sleep** after ~15 min idle (first visit may take 30–60s).
