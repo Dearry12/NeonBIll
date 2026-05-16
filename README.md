@@ -231,6 +231,8 @@ NeonBill is a full Laravel app (PHP + MySQL + build step). **Shared PHP hosts (I
 
 **Recommended: Railway (step-by-step)**
 
+> **Build failed (PHP 8.3 vs 8.4)?** Railway defaults to PHP 8.3. This repo pins **PHP 8.4** via `.php-version` — commit and redeploy.
+
 1. Push NeonBill to **GitHub**.
 2. Sign up at [railway.app](https://railway.app) → **New Project** → **Deploy from GitHub** → select the repo.
 3. Add **MySQL** (Railway dashboard → **+ New** → **Database** → MySQL). Copy `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER`, `MYSQLPASSWORD` into the web service variables.
